@@ -13,7 +13,7 @@ const ARTICLES_DIR = path.join(__dirname, '../src/content/blog');
 
 async function generateArticle() {
   const response = await openai.chat.completions.create({
-    model: "gpt-4-turbo-0125",
+    model: "o4-mini",
     messages: [
       {
         role: "system",
