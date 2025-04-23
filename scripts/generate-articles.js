@@ -11,20 +11,20 @@ const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const generateArticle = async () => {
   const prompt = `You are a tech journalist writing about the Austin, Texas technology scene. Write an engaging, factual article about recent tech developments, startups, or tech culture in Austin. Include a title, date, and article content. Format the response in markdown.`;
 
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'mistralai/mistral-7b-instruct', // You can try others like "google/gemma-7b-it"
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: prompt },
-      ],
-    }),
-  });
+  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    model: "mistralai/mistral-7b-instruct",
+    messages: [
+      { role: "system", content: "You are a helpful assistant." },
+      { role: "user", content: prompt }
+    ]
+  })
+});
 
   const json = await response.json();
 
