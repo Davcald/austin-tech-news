@@ -5,16 +5,22 @@ on:
     - cron: '0 0,12 * * *'  # Runs at 00:00 and 12:00 UTC
   workflow_dispatch:  # Allows manual triggering
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   generate-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -47,9 +53,9 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
