@@ -31,7 +31,7 @@ jobs:
       - name: Generate new articles
         run: node scripts/generate-articles.js
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
       - name: Setup Git
         run: |
